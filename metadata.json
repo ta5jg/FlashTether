@@ -1,0 +1,21 @@
+{
+  "symbol": "USDTz",
+  "name": "Flash Tether",
+  "decimals": 6,
+  "description": "FlashTether, özel bir grup için geliştirilmiş TRC20 tokenidir. Chainlink destekli fiyat alma sistemi ile USD karşılığı görüntülenebilir.",
+  "website": "https://github.com/ta5jg/usdtz",
+  "email": "contact@flashnetwork.dev",
+  "facebook": "",
+  "twitter": "",
+  "github": "https://github.com/ta5jg/usdtz",
+  "telegram": "",
+  "whitepaper": "",
+  "token": {
+    "address": "TU5wtivZ2wPi3AzXpPJrnDHnVQgkqr8LcB",
+    "owner": "TJGz93nx1LXPMioQnHH3d7e1XovpnDU1h3",
+    "v": "v1.0",
+    "type": "TRC20",
+    "tronScanUrl": "https://shasta.tronscan.org/#/token20/TU5wtivZ2wPi3AzXpPJrnDHnVQgkqr8LcB",
+    "logo": "https://raw.githubusercontent.com/ta5jg/usdtz/refs/heads/main/logo.png"
+  }
+}
