@@ -2,29 +2,39 @@ const path = require("path");
 require('dotenv').config();
 const TronWeb = require('tronweb');
 
-// .env dosyasından özel anahtarı al
-const privateKey = process.env.PRIVATE_KEY_SHASTA;
+// Mainnet ve Shasta için ayrı private key tanımı
+const privateKeyMainnet = process.env.PRIVATE_KEY_MAINNET;
+const privateKeyShasta = process.env.PRIVATE_KEY_SHASTA;
 
-// TronWeb nesnesini oluştur
-const tronWeb = new TronWeb({
-                              fullHost: 'https://api.shasta.trongrid.io',
-                              privateKey
-                            });
+const tronWebMainnet = new TronWeb({
+                                     fullHost: 'https://api.trongrid.io',
+                                     privateKey: privateKeyMainnet,
+                                   });
 
-// Private key'den Base58 adres türet
-const walletAddress = tronWeb.address.fromPrivateKey(privateKey);
+const tronWebShasta = new TronWeb({
+                                    fullHost: 'https://api.shasta.trongrid.io',
+                                    privateKey: privateKeyShasta,
+                                  });
 
 module.exports = {
   contracts_directory: "./contracts",
   contracts_build_directory: path.join(__dirname, "build/contracts"),
   networks: {
+    mainnet: {
+      privateKey: privateKeyMainnet,
+      address: tronWebMainnet.address.fromPrivateKey(privateKeyMainnet),
+      userFeePercentage: 50,
+      feeLimit: 1000 * 1e6,
+      fullHost: 'https://api.trongrid.io',
+      network_id: '1',
+    },
     shasta: {
-      privateKey,  // Private key burada kalıyor ama doğrudan adres olarak kullanılmayacak
-      address: walletAddress,  // Özel anahtardan doğru formatta türetilmiş adres
+      privateKey: privateKeyShasta,
+      address: tronWebShasta.address.fromPrivateKey(privateKeyShasta),
       userFeePercentage: 50,
       feeLimit: 1000 * 1e6,
       fullHost: 'https://api.shasta.trongrid.io',
-      network_id: '2'
+      network_id: '2',
     },
   },
   compilers: {

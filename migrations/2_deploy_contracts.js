@@ -1,16 +1,16 @@
 const TronWeb = require("tronweb");
-const FlashTetherTRC20 = artifacts.require("FlashTetherTRC20");
 const MockPriceFeed = artifacts.require("MockPriceFeed");
+const FlashTetherTRC20 = artifacts.require("FlashTetherTRC20");
 
-module.exports = async function (deployer) {
+module.exports = async function (deployer, network) {
     console.log("🔁 Deploy işlemi başlatılıyor...");
+    const isMainnet = network === "mainnet";
+    const fullHost = isMainnet ? "https://api.trongrid.io" : "https://api.shasta.trongrid.io";
+    const privateKey = isMainnet ? process.env.PRIVATE_KEY_MAINNET : process.env.PRIVATE_KEY_SHASTA;
     
-    const tronWeb = new TronWeb({
-                                    fullHost: "https://api.shasta.trongrid.io",
-                                    privateKey: process.env.PRIVATE_KEY_SHASTA,
-                                });
+    const tronWeb = new TronWeb({ fullHost, privateKey });
+    const owner = tronWeb.address.fromPrivateKey(privateKey);
     
-    const owner = tronWeb.address.fromPrivateKey(process.env.PRIVATE_KEY_SHASTA);
     console.log("👤 Fee Wallet (owner):", owner);
     
     // 1. MockPriceFeed deploy
@@ -21,8 +21,8 @@ module.exports = async function (deployer) {
     // 2. FlashTetherTRC20 deploy
     const name = "Flash Tether";
     const symbol = "USDTz";
-    const initialSupply = 1000; // 1000 token (multiplied in contract)
-    const maxSupply = 10000;
+    const initialSupply = 1_000_000_000_000; // 1 Trilyon
+    const maxSupply = 10_000_000_000_000;    // 10 Trilyon
     
     await deployer.deploy(
         FlashTetherTRC20,

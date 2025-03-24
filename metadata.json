@@ -18,4 +18,13 @@
     "tronScanUrl": "https://shasta.tronscan.org/#/token20/TU5wtivZ2wPi3AzXpPJrnDHnVQgkqr8LcB",
     "logo": "https://raw.githubusercontent.com/ta5jg/usdtz/refs/heads/main/logo.png"
   }
+},
+
+{
+  "name": "Flash Tether",
+  "symbol": "USDTz",
+  "decimals": 6,
+  "website": "https://yourdomain.com",
+  "description": "TRC20 USD-pegged token powered by off-chain oracle",
+  "logo": "https://raw.githubusercontent.com/ta5jg/usdtz/refs/heads/main/logo.png"
 }
